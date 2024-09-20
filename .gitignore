@@ -1,0 +1,7 @@
+__pycache__
+.graph_dumps
+*.sh
+data
+wandb
+*.swp
+*.zip
