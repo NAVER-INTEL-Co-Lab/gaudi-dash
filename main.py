@@ -106,10 +106,10 @@ def train_chunk(args, model, init_model, criterion, optimizer, schedulers, chunk
     epoch, step, train_acc, train_loss = 0, 0, 0, 0
     _, chunk_loader, _ = chunk_loader_lst
     while True:
-        # For Metric 
-        if chunk_idx >= 1:
-            prev_log = get_prev_metric(args, epoch, chunk_idx, model, 
-                                       chunk_loader_lst)
+        # TODO: Accelerating previous metric
+        # if chunk_idx >= 1:
+        #    prev_log = get_prev_metric(args, epoch, chunk_idx, model, 
+        #                               chunk_loader_lst)
         # Train one epoch
         epoch_acc, epoch_loss = train_epoch(args, model, init_model, criterion, optimizer, schedulers[1], chunk_loader, epoch)
         
