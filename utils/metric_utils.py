@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import numpy as np
 from tqdm import tqdm
+import gc
 
 import habana_frameworks.torch.core as htcore
 
@@ -131,15 +132,20 @@ def get_gradnorm(args, model, chunk_loader, criterion):
     model.zero_grad()
     model.train()
     loss = 0
-    for i, (inputs, targets) in enumerate(chunk_loader):
+    print("Gradnorm started")
+    for i, (inputs, targets) in tqdm(enumerate(chunk_loader)):
         inputs = inputs.to(args.device)
         targets = targets.to(args.device)
         outputs = model(inputs)
         loss = criterion(outputs, targets)
         loss.backward()
+        htcore.mark_step()
     grad_norm = get_grad_norm_stats(args, model)['mean_grad_norm']
     model.zero_grad()
     torch.cuda.empty_cache()
+    #del loss
+    #gc.collect()
+    print("Gradnorm ended")
     return grad_norm
 
 def get_prevacc(args, model, chunk_loader):

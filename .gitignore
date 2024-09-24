@@ -5,3 +5,4 @@ data
 wandb
 *.swp
 *.zip
+.ipynb_checkpoints

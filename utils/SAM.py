@@ -1,4 +1,6 @@
 import torch
+import habana_frameworks.torch.core as htcore
+
 class SAM(torch.optim.Optimizer):
     def __init__(self, params, base_optimizer, rho=0.05, adaptive=False, **kwargs):
         assert rho >= 0.0, f"Invalid rho, should be non-negative: {rho}"
@@ -32,7 +34,7 @@ class SAM(torch.optim.Optimizer):
                 p.data = self.state[p]["old_p"]  # get back to "w" from "w + e(w)"
 
         self.base_optimizer.step()  # do the actual "sharpness-aware" update
-
+        htcore.mark_step()
         if zero_grad: self.zero_grad()
 
     @torch.no_grad()
@@ -41,9 +43,10 @@ class SAM(torch.optim.Optimizer):
         closure = torch.enable_grad()(closure)  # the closure should do a full forward-backward pass
 
         self.first_step(zero_grad=True)
+        htcore.mark_step()
         closure()
         self.second_step()
-
+        htcore.mark_step()
     def _grad_norm(self):
         shared_device = self.param_groups[0]["params"][0].device  # put everything on the same device, in case of model parallelism
         norm = torch.norm(

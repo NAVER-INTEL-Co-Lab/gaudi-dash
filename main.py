@@ -107,10 +107,11 @@ def train_chunk(args, model, init_model, criterion, optimizer, schedulers, chunk
     _, chunk_loader, _ = chunk_loader_lst
     while True:
         # TODO: Accelerating previous metric
-        # if chunk_idx >= 1:
-        #    prev_log = get_prev_metric(args, epoch, chunk_idx, model, 
-        #                               chunk_loader_lst)
-        # Train one epoch
+        if chunk_idx >= 1:
+            prev_log = get_prev_metric(args, epoch, chunk_idx, model, 
+                                       chunk_loader_lst)
+            # Train one epoch
+            print(prev_log)
         epoch_acc, epoch_loss = train_epoch(args, model, init_model, criterion, optimizer, schedulers[1], chunk_loader, epoch)
         
         if args.sota == True:
@@ -143,6 +144,7 @@ def train_epoch(args, model, init_model, criterion, optimizer, warmup_scheduler,
             htcore.mark_step()
         elif args.optimizer_type == 'sam':
             optimizer.first_step(zero_grad=True)
+            htcore.mark_step()
             outputs = model(inputs)
             second_loss = return_loss(args, criterion, outputs, targets, model, init_model)
             second_loss.backward()
