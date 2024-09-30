@@ -2,6 +2,8 @@
 
 This repository contains the implementation of **Direction-Aware SHrinking (DASH)**, a method for warm-starting neural network training without losing plasticity under stationary conditions in Intel Gaudi.
 
+We've included code in verify.ipynb and verify_nvidia.ipynb that reports some issues encountered when applying the Sharpness-Aware Minimization (SAM) algorithm in eager/lazy mode with Intel Gaudi.
+
 ## 📄 Paper
 
 For more details, check out our paper: 
