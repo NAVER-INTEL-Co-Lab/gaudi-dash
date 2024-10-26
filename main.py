@@ -145,9 +145,7 @@ def train_epoch(args, model, init_model, criterion, optimizer, warmup_scheduler,
         elif args.optimizer_type == 'sam':
             optimizer.first_step(zero_grad=True)
             htcore.mark_step()
-            outputs = model(inputs)
-            second_loss = return_loss(args, criterion, outputs, targets, model, init_model)
-            second_loss.backward()
+            return_loss(args, criterion, model(inputs), targets, model, init_model).backward()
             htcore.mark_step()
             optimizer.second_step(zero_grad=True)
             htcore.mark_step()
