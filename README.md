@@ -83,7 +83,7 @@ For our synthetic experiment described in Section 4, please refer to the `Discre
     title={{DASH}: Warm-Starting Neural Network Training in Stationary Settings without Loss of Plasticity}, 
     author={Baekrok Shin and Junsoo Oh and Hanseul Cho and Chulhee Yun},
     booktitle={Advances in Neural Information Processing Systems},
-    volume={37},
+    volume={38},
     year={2024}
 }
 ```
