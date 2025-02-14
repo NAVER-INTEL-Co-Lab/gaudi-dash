@@ -1,12 +1,16 @@
-# DASH: Warm-Starting Neural Network Training Without Loss of Plasticity Under Stationarity
+# Gaudi-DASH
 
 This repository contains the implementation of **Direction-Aware SHrinking (DASH)**, a method for warm-starting neural network training without losing plasticity under stationary conditions in Intel Gaudi.
+
+---
+
+We also included code in verify.ipynb and verify_nvidia.ipynb that reports some issues encountered when applying the Sharpness-Aware Minimization (SAM) algorithm in eager/lazy mode with Intel Gaudi.
 
 ## 📄 Paper
 
 For more details, check out our paper: 
 
-[DASH: Warm-Starting Neural Network Training Without Loss of Plasticity Under Stationarity](https://openreview.net/pdf?id=GR5LXaglgG)
+[DASH: Warm-Starting Neural Network Training in Stationary Settings without Loss of Plasticity](https://arxiv.org/abs/2410.23495)
 
 ## 🛠️ Setup
 
@@ -75,12 +79,11 @@ For our synthetic experiment described in Section 4, please refer to the `Discre
 
 ## 📚 Citation
 ```bibtex
-@inproceedings{
-    shin2024dash,
-    title={{DASH}: Warm-Starting Neural Network Training Without Loss of Plasticity Under Stationarity},
+@inproceedings{shin2024dash,
+    title={{DASH}: Warm-Starting Neural Network Training in Stationary Settings without Loss of Plasticity}, 
     author={Baekrok Shin and Junsoo Oh and Hanseul Cho and Chulhee Yun},
-    booktitle={2nd Workshop on Advancing Neural Network Training: Computational Efficiency, Scalability, and Resource Optimization (WANT@ICML 2024)},
-    year={2024},
-    url={https://openreview.net/forum?id=GR5LXaglgG}
+    booktitle={Advances in Neural Information Processing Systems},
+    volume={38},
+    year={2024}
 }
 ```
