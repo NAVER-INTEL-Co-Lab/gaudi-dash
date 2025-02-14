@@ -180,7 +180,6 @@ def evaluate(args, loader, model, train_acc, train_loss, step, epoch):
             outputs = model(inputs)
             _, preds = outputs.max(1)
             cur_loss = criterion(outputs, targets)
-            htcore.mark_step()# Test
             loss += cur_loss
             acc += preds.eq(targets).float().mean().item()
 

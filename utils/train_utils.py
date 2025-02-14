@@ -128,7 +128,7 @@ def dash(args, model, criterion, chunk_loader):
         y_hat = temp_net(x_batch.to(args.device))
         loss = criterion(y_hat, y_batch.to(args.device))
         loss.backward()
-
+        htcore.mark_step()
         step = 0
         bias_step = 0
         for m in temp_net.modules():
